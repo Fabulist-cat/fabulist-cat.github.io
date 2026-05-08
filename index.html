@@ -11,25 +11,78 @@
     body {
       background: #0e0c08;
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      overflow: hidden;
     }
 
+    /* ══ Navigation bar ══════════════════════════════════════════════ */
+    #top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      background: linear-gradient(to bottom, rgba(10,7,3,0.97), rgba(10,7,3,0.75));
+      border-bottom: 1px solid #2e2010;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 4px;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    #top-nav .nav-title {
+      color: #c9922a;
+      font-size: 0.88em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-right: 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    #top-nav .nav-sep {
+      width: 1px;
+      height: 18px;
+      background: #2e2010;
+      margin: 0 14px 0 10px;
+      flex-shrink: 0;
+    }
+    #top-nav a {
+      color: #887050;
+      text-decoration: none;
+      font-size: 0.8em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    #top-nav a:hover {
+      color: #ede0c4;
+      border-color: #3a2a0a;
+      background: rgba(58,42,10,0.25);
+    }
+    #top-nav a.active {
+      color: #c9922a;
+      border-color: #7a5c1e;
+    }
+
+    /* ══ Map — sits below the nav ════════════════════════════════════ */
     #map {
-      width: 100vw;
-      height: 100vh;
+      position: fixed;
+      top: 44px; bottom: 0; left: 0; right: 0;
       background: #0e0c08;
     }
 
-    /* ── Popup styling ── */
+    /* ══ Popup styling ═══════════════════════════════════════════════ */
     .leaflet-popup-content-wrapper {
       background: #1e160a;
       border: 1px solid #7a5c1e;
       border-radius: 3px;
       color: #ede0c4;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.8);
     }
-    .leaflet-popup-tip-container { display: none; }  /* cleaner without the arrow */
-    .leaflet-popup-close-button { color: #7a5c1e !important; font-size: 18px !important; }
-
+    .leaflet-popup-tip-container { display: none; }
+    .leaflet-popup-close-button  { color: #7a5c1e !important; font-size: 18px !important; }
     .leaflet-popup-content {
       margin: 14px 18px;
       min-width: 200px;
@@ -59,9 +112,9 @@
     }
     .popup-link:hover { background: #7a5c1e; color: #fff; }
 
-    /* ── Hover label (tooltip) styling ── */
+    /* ══ Tooltip labels ══════════════════════════════════════════════ */
     .leaflet-tooltip.map-label {
-      background: rgba(14, 10, 4, 0.82);
+      background: rgba(14,10,4,0.85);
       border: 1px solid #7a5c1e;
       color: #ede0c4;
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
@@ -73,7 +126,6 @@
     }
     .leaflet-tooltip.map-label::before { display: none; }
 
-    /* ── Permanent label (always visible) ── */
     .leaflet-tooltip.map-label-permanent {
       background: transparent;
       border: none;
@@ -82,18 +134,18 @@
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
       font-size: 0.75em;
       letter-spacing: 0.08em;
-      text-shadow: 0 1px 3px #000, 0 0 6px #000;
+      text-shadow: 0 1px 4px #000, 0 0 8px #000;
       font-weight: normal;
       white-space: nowrap;
+      pointer-events: none;
     }
     .leaflet-tooltip.map-label-permanent::before { display: none; }
 
-    /* ── Dev coordinate readout ── */
+    /* ══ Coordinate readout (Shift+click) ════════════════════════════ */
     #dev-coords {
       position: fixed;
-      bottom: 12px;
-      left: 12px;
-      background: rgba(0, 0, 0, 0.72);
+      bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.78);
       color: #c9922a;
       padding: 5px 11px;
       font-family: monospace;
@@ -102,95 +154,252 @@
       pointer-events: none;
       border: 1px solid #3a2a0a;
       letter-spacing: 0.05em;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
+    #dev-coords.visible { opacity: 1; }
+
+    #copy-flash {
+      position: fixed;
+      bottom: 42px; left: 12px;
+      background: rgba(201,146,42,0.12);
+      color: #c9922a;
+      border: 1px solid #7a5c1e;
+      padding: 3px 9px;
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    #copy-flash.visible { opacity: 1; }
   </style>
 </head>
 <body>
 
+  <!-- ══ Navigation ═══════════════════════════════════════════════════ -->
+  <nav id="top-nav">
+    <span class="nav-title">The Map</span>
+    <div class="nav-sep"></div>
+    <a href="locations/index.html">Locations</a>
+    <a href="events/index.html">Events</a>
+    <a href="personalities/index.html">Personalities</a>
+  </nav>
+
   <div id="map"></div>
-  <div id="dev-coords">↖ Click anywhere on the map to get pixel coordinates</div>
+  <div id="dev-coords"></div>
+  <div id="copy-flash">✓ copied</div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="markers.js"></script>
 
   <script>
-    // ═══════════════════════════════════════════════════════════════
-    //  MAP CONFIGURATION — edit these if your image size changes
-    // ═══════════════════════════════════════════════════════════════
+    // ═════════════════════════════════════════════════════════════════
+    //  MAP CONFIGURATION — change MAP_W / MAP_H if your image changes
+    // ═════════════════════════════════════════════════════════════════
     const MAP_W = 941;
     const MAP_H = 1671;
 
-    // ── Coordinate conversion ─────────────────────────────────────
-    // Leaflet CRS.Simple uses [lat, lng] = [y_from_bottom, x_from_left].
-    // We work in pixel coords (0,0 at TOP-LEFT) to stay human-friendly.
-    function px(pixelX, pixelY) {
-      return L.latLng(MAP_H - pixelY, pixelX);
+    // ── Coordinate helpers ────────────────────────────────────────
+    // Leaflet CRS.Simple = [lat, lng] = [y_from_bottom, x_from_left].
+    // All our data uses pixel coords (0,0 = top-left). Conversion is:
+    function px(pixelX, pixelY)   { return L.latLng(MAP_H - pixelY, pixelX); }
+    function pxPoints(pts)        { return pts.map(function(p){ return px(p[0], p[1]); }); }
+
+    // ── FIX #1 — Default icon (inline SVG, zero file dependency) ─
+    //
+    //   L.icon({ iconUrl: 'some-file.png' }) shows a broken-image
+    //   placeholder if the file is missing.
+    //
+    //   L.divIcon with an inline <svg> string never needs a file and
+    //   therefore never breaks. Use this as the fallback for any
+    //   marker that doesn't specify its own icon file.
+    //
+    const DEFAULT_ICON = L.divIcon({
+      html: `<svg xmlns="http://www.w3.org/2000/svg"
+                  width="22" height="34" viewBox="0 0 22 34">
+               <ellipse cx="11" cy="33" rx="5" ry="1.5"
+                        fill="rgba(0,0,0,0.4)"/>
+               <path d="M11 1C5.48 1 1 5.48 1 11
+                        c0 7.18 10 22 10 22S21 18.18 21 11
+                        C21 5.48 16.52 1 11 1z"
+                     fill="#c9922a" stroke="#7a5c1e" stroke-width="1.5"/>
+               <circle cx="11" cy="11" r="4"
+                       fill="#1e160a" opacity="0.75"/>
+             </svg>`,
+      className:   '',        // no wrapper div class — keeps DOM clean
+      iconSize:    [22, 34],
+      iconAnchor:  [11, 34],  // tip of pin sits on the coordinate
+      popupAnchor: [0, -36],
+    });
+
+    function makeIcon(m) {
+      if (!m.icon) return DEFAULT_ICON;
+      return L.icon({
+        iconUrl:     m.icon,
+        iconSize:    m.iconSize    || [32, 32],
+        iconAnchor:  m.iconAnchor  || [16, 32],
+        popupAnchor: [0, -36],
+      });
     }
 
-    // ── Initialise map ────────────────────────────────────────────
+    // ── Initialise Leaflet ────────────────────────────────────────
     const map = L.map('map', {
-      crs:              L.CRS.Simple,
-      minZoom:          -2,
-      maxZoom:          4,
-      zoomSnap:         0.25,
-      zoomDelta:        0.5,
+      crs:               L.CRS.Simple,
+      minZoom:           -2,
+      maxZoom:           4,
+      zoomSnap:          0.25,
+      zoomDelta:         0.5,
       attributionControl: false,
-      zoomControl:      true,
     });
 
     const imageBounds = [[0, 0], [MAP_H, MAP_W]];
     L.imageOverlay('img/map.jpg', imageBounds).addTo(map);
     map.fitBounds(imageBounds);
+    map.setMaxBounds([[-300, -300], [MAP_H + 300, MAP_W + 300]]);
 
-    // Prevent panning far outside the image
-    const padded = [[-300, -300], [MAP_H + 300, MAP_W + 300]];
-    map.setMaxBounds(padded);
+    // ── FIX #4 — Shift+click for coordinates (no clipboard spam) ─
+    const coordsEl   = document.getElementById('dev-coords');
+    const flashEl    = document.getElementById('copy-flash');
+    let   flashTimer = null;
 
-    // ── Dev: click to show coordinates ───────────────────────────
-    const coordsEl = document.getElementById('dev-coords');
     map.on('click', function (e) {
+      if (!e.originalEvent.shiftKey) return;   // plain clicks → ignored
+
       const pixelX = Math.round(e.latlng.lng);
       const pixelY = Math.round(MAP_H - e.latlng.lat);
-      coordsEl.textContent = `x: ${pixelX},  y: ${pixelY}`;
-      // Also copy to clipboard for convenience
-      navigator.clipboard?.writeText(`x: ${pixelX}, y: ${pixelY}`).catch(() => {});
+      const text   = `x: ${pixelX}, y: ${pixelY}`;
+
+      coordsEl.textContent = text;
+      coordsEl.classList.add('visible');
+
+      navigator.clipboard?.writeText(text).then(function () {
+        flashEl.classList.add('visible');
+        clearTimeout(flashTimer);
+        flashTimer = setTimeout(function () {
+          flashEl.classList.remove('visible');
+        }, 1600);
+      }).catch(function () {});
     });
 
-    // ── Render markers from markers.js ────────────────────────────
-    MARKERS.forEach(function (m) {
+    // ── Shared helpers ────────────────────────────────────────────
+    function popupHTML(m) {
+      const link = m.link
+        ? `<a class="popup-link" href="${m.link}">Read more →</a>` : '';
+      return `<h3>${m.name}</h3><p>${m.description || ''}</p>${link}`;
+    }
 
-      // Icon
-      const iconOptions = {
-        iconUrl:    m.icon       || 'img/icons/default.png',
-        iconSize:   m.iconSize   || [32, 32],
-        iconAnchor: m.iconAnchor || [16, 32],
-        popupAnchor: [0, -36],
+    function bindLabel(layer, m) {
+      if (m.label === false) return;
+      const perm = !!m.labelPermanent;
+      layer.bindTooltip(m.name, {
+        permanent:  perm,
+        direction:  m.labelDir    || 'top',
+        offset:     m.labelOffset || [0, -4],
+        className:  perm ? 'map-label-permanent' : 'map-label',
+      });
+    }
+
+    // ── FIX #3 — Polygon / polyline renderers ─────────────────────
+    //
+    //  Glow technique:
+    //    • On mouseover  → increase stroke weight + brightness, then apply
+    //                      CSS drop-shadow via getElement() on the SVG path.
+    //    • On click      → open popup (same as a marker).
+    //    • On mouseout   → restore original style + remove filter.
+    //
+    //  getElement() returns the raw <path> SVG element that Leaflet draws.
+    //  Setting element.style.filter lets us apply a CSS drop-shadow glow
+    //  without needing any extra library.
+
+    function renderPolygon(m) {
+      const base = {
+        color:       m.color       || '#c9922a',
+        weight:      m.weight      || 1.5,
+        opacity:     m.opacity     !== undefined ? m.opacity     : 0.65,
+        fillColor:   m.fillColor   || m.color || '#c9922a',
+        fillOpacity: m.fillOpacity !== undefined ? m.fillOpacity : 0.08,
+        lineCap:     'round',
+        lineJoin:    'round',
       };
-      const icon = L.icon(iconOptions);
+      const hover = Object.assign({}, base, {
+        weight:      base.weight + 2,
+        opacity:     1,
+        fillOpacity: Math.min(base.fillOpacity + 0.1, 0.4),
+      });
 
-      // Marker
-      const marker = L.marker(px(m.x, m.y), { icon, title: m.name }).addTo(map);
+      const layer = L.polygon(pxPoints(m.points), base).addTo(map);
+      const glowColor = m.glowColor || '#f5d070';
 
-      // Popup
-      const linkHtml = m.link
-        ? `<a class="popup-link" href="${m.link}">Read more →</a>`
-        : '';
+      layer.on('mouseover', function () {
+        this.setStyle(hover);
+        const el = this.getElement();
+        if (el) el.style.filter =
+          `drop-shadow(0 0 5px ${glowColor}) drop-shadow(0 0 10px ${glowColor})`;
+      });
+      layer.on('mouseout', function () {
+        this.setStyle(base);
+        const el = this.getElement();
+        if (el) el.style.filter = '';
+      });
+      layer.on('click', function () {
+        this.openPopup();
+      });
 
-      marker.bindPopup(
-        `<h3>${m.name}</h3><p>${m.description}</p>${linkHtml}`,
-        { maxWidth: 300, minWidth: 200 }
-      );
+      layer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
+      bindLabel(layer, m);
+    }
 
-      // Tooltip (hover label or permanent label)
-      if (m.label !== false) {
-        const isPermanent = !!m.labelPermanent;
-        marker.bindTooltip(m.name, {
-          permanent:  isPermanent,
-          direction:  m.labelDir || 'top',
-          offset:     m.labelOffset || [0, -4],
-          className:  isPermanent ? 'map-label-permanent' : 'map-label',
-        });
-      }
+    function renderPolyline(m) {
+      const base = {
+        color:     m.color     || '#4a8ab0',
+        weight:    m.weight    || 2,
+        opacity:   m.opacity   !== undefined ? m.opacity : 0.65,
+        dashArray: m.dashArray || null,
+        lineCap:   'round',
+      };
+      const hover = Object.assign({}, base, {
+        weight:  base.weight + 2,
+        opacity: 1,
+      });
+
+      const layer = L.polyline(pxPoints(m.points), base).addTo(map);
+      const glowColor = m.glowColor || '#88ccff';
+
+      layer.on('mouseover', function () {
+        this.setStyle(hover);
+        const el = this.getElement();
+        if (el) el.style.filter =
+          `drop-shadow(0 0 4px ${glowColor}) drop-shadow(0 0 8px ${glowColor})`;
+      });
+      layer.on('mouseout', function () {
+        this.setStyle(base);
+        const el = this.getElement();
+        if (el) el.style.filter = '';
+      });
+      layer.on('click', function () { this.openPopup(); });
+
+      layer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
+      if (m.name && m.label !== false) bindLabel(layer, m);
+    }
+
+    function renderMarker(m) {
+      const marker = L.marker(px(m.x, m.y), {
+        icon:  makeIcon(m),
+        title: m.name,
+      }).addTo(map);
+
+      marker.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
+      bindLabel(marker, m);
+    }
+
+    // ── Dispatch all entries in markers.js ────────────────────────
+    MARKERS.forEach(function (m) {
+      if      (m.type === 'polygon')  renderPolygon(m);
+      else if (m.type === 'polyline') renderPolyline(m);
+      else                            renderMarker(m);
     });
   </script>
 </body>
