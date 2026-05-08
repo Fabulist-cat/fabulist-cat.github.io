@@ -315,74 +315,152 @@
     //  without needing any extra library.
 
     function renderPolygon(m) {
-      const base = {
-        color:       m.color       || '#c9922a',
-        weight:      m.weight      || 1.5,
-        opacity:     m.opacity     !== undefined ? m.opacity     : 0.65,
-        fillColor:   m.fillColor   || m.color || '#c9922a',
-        fillOpacity: m.fillOpacity !== undefined ? m.fillOpacity : 0.08,
+      const glowColor = m.glowColor || '#f5d070';
+      const strokeColor = m.color || '#c9922a';
+      const strokeWeight = m.weight || 2;
+      const hitWeight = m.hitWeight || Math.max(14, strokeWeight + 10);
+
+      const hitStyle = {
+        color:       strokeColor,
+        weight:      hitWeight,
+        opacity:     0,
+        fill:        true,
+        fillColor:   strokeColor,
+        fillOpacity: 0,
         lineCap:     'round',
         lineJoin:    'round',
       };
-      const hover = Object.assign({}, base, {
-        weight:      base.weight + 2,
+
+      const baseStyle = {
+        color:       strokeColor,
+        weight:      strokeWeight,
+        opacity:     0,
+        fill:        false,
+        interactive: false,
+        lineCap:     'round',
+        lineJoin:    'round',
+      };
+
+      const hoverStyle = {
+        color:       glowColor,
+        weight:      strokeWeight + 1.5,
         opacity:     1,
-        fillOpacity: Math.min(base.fillOpacity + 0.1, 0.4),
-      });
+        fill:        false,
+        lineCap:     'round',
+        lineJoin:    'round',
+      };
 
-      const layer = L.polygon(pxPoints(m.points), base).addTo(map);
-      const glowColor = m.glowColor || '#f5d070';
+      const points = pxPoints(m.points);
+      const hitLayer = L.polygon(points, hitStyle).addTo(map);
+      const visualLayer = L.polygon(points, baseStyle).addTo(map);
+      let selected = false;
 
-      layer.on('mouseover', function () {
-        this.setStyle(hover);
-        const el = this.getElement();
+      const setHover = function () {
+        visualLayer.setStyle(hoverStyle);
+        const el = visualLayer.getElement();
         if (el) el.style.filter =
-          `drop-shadow(0 0 5px ${glowColor}) drop-shadow(0 0 10px ${glowColor})`;
-      });
-      layer.on('mouseout', function () {
-        this.setStyle(base);
-        const el = this.getElement();
+          `drop-shadow(0 0 6px ${glowColor}) drop-shadow(0 0 14px ${glowColor})`;
+        visualLayer.bringToFront();
+      };
+
+      const setBase = function () {
+        visualLayer.setStyle(baseStyle);
+        const el = visualLayer.getElement();
         if (el) el.style.filter = '';
+      };
+
+      hitLayer.on('mouseover', setHover);
+      hitLayer.on('mouseout', function () {
+        if (!selected) setBase();
       });
-      layer.on('click', function () {
+      hitLayer.on('click', function () {
+        selected = true;
+        setHover();
         this.openPopup();
       });
+      hitLayer.on('popupopen', function () {
+        selected = true;
+        setHover();
+      });
+      hitLayer.on('popupclose', function () {
+        selected = false;
+        setBase();
+      });
 
-      layer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
-      bindLabel(layer, m);
+      hitLayer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
+      bindLabel(hitLayer, m);
     }
 
     function renderPolyline(m) {
-      const base = {
-        color:     m.color     || '#4a8ab0',
-        weight:    m.weight    || 2,
-        opacity:   m.opacity   !== undefined ? m.opacity : 0.65,
+      const glowColor = m.glowColor || '#88ccff';
+      const strokeColor = m.color || '#4a8ab0';
+      const visibleWeight = m.weight || 2;
+      const hitWeight = m.hitWeight || Math.max(14, visibleWeight + 10);
+
+      const hitStyle = {
+        color:     strokeColor,
+        weight:    hitWeight,
+        opacity:   0,
         dashArray: m.dashArray || null,
         lineCap:   'round',
       };
-      const hover = Object.assign({}, base, {
-        weight:  base.weight + 2,
-        opacity: 1,
-      });
 
-      const layer = L.polyline(pxPoints(m.points), base).addTo(map);
-      const glowColor = m.glowColor || '#88ccff';
+      const baseStyle = {
+        color:       strokeColor,
+        weight:      visibleWeight,
+        opacity:     0,
+        interactive: false,
+        dashArray:   m.dashArray || null,
+        lineCap:     'round',
+      };
 
-      layer.on('mouseover', function () {
-        this.setStyle(hover);
-        const el = this.getElement();
+      const hoverStyle = {
+        color:     glowColor,
+        weight:    visibleWeight,
+        opacity:   1,
+        dashArray: m.dashArray || null,
+        lineCap:   'round',
+      };
+
+      const points = pxPoints(m.points);
+      const hitLayer = L.polyline(points, hitStyle).addTo(map);
+      const visualLayer = L.polyline(points, baseStyle).addTo(map);
+      let selected = false;
+
+      const setHover = function () {
+        visualLayer.setStyle(hoverStyle);
+        const el = visualLayer.getElement();
         if (el) el.style.filter =
           `drop-shadow(0 0 4px ${glowColor}) drop-shadow(0 0 8px ${glowColor})`;
-      });
-      layer.on('mouseout', function () {
-        this.setStyle(base);
-        const el = this.getElement();
-        if (el) el.style.filter = '';
-      });
-      layer.on('click', function () { this.openPopup(); });
+        visualLayer.bringToFront();
+      };
 
-      layer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
-      if (m.name && m.label !== false) bindLabel(layer, m);
+      const setBase = function () {
+        visualLayer.setStyle(baseStyle);
+        const el = visualLayer.getElement();
+        if (el) el.style.filter = '';
+      };
+
+      hitLayer.on('mouseover', setHover);
+      hitLayer.on('mouseout', function () {
+        if (!selected) setBase();
+      });
+      hitLayer.on('click', function () {
+        selected = true;
+        setHover();
+        this.openPopup();
+      });
+      hitLayer.on('popupopen', function () {
+        selected = true;
+        setHover();
+      });
+      hitLayer.on('popupclose', function () {
+        selected = false;
+        setBase();
+      });
+
+      hitLayer.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
+      if (m.name && m.label !== false) bindLabel(hitLayer, m);
     }
 
     function renderMarker(m) {
