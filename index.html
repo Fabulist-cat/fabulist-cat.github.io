@@ -217,31 +217,43 @@
     //   therefore never breaks. Use this as the fallback for any
     //   marker that doesn't specify its own icon file.
     //
-    const DEFAULT_ICON = L.divIcon({
-      html: `<svg xmlns="http://www.w3.org/2000/svg"
-                  width="22" height="34" viewBox="0 0 22 34">
-               <ellipse cx="11" cy="33" rx="5" ry="1.5"
-                        fill="rgba(0,0,0,0.4)"/>
-               <path d="M11 1C5.48 1 1 5.48 1 11
-                        c0 7.18 10 22 10 22S21 18.18 21 11
-                        C21 5.48 16.52 1 11 1z"
-                     fill="#c9922a" stroke="#7a5c1e" stroke-width="1.5"/>
-               <circle cx="11" cy="11" r="4"
-                       fill="#1e160a" opacity="0.75"/>
-             </svg>`,
-      className:   '',        // no wrapper div class — keeps DOM clean
-      iconSize:    [22, 34],
-      iconAnchor:  [11, 34],  // tip of pin sits on the coordinate
-      popupAnchor: [0, -36],
-    });
+    function scalePair(pair, scale) {
+      return [
+        Math.max(1, Math.round(pair[0] * scale)),
+        Math.max(1, Math.round(pair[1] * scale))
+      ];
+    }
 
-    function makeIcon(m) {
-      if (!m.icon) return DEFAULT_ICON;
+    function makeIcon(m, scale) {
+      const s = scale || 1;
+      const popupAnchor = m.popupAnchor || [0, -36];
+
+      if (!m.icon) {
+        return L.divIcon({
+          html: `<svg xmlns="http://www.w3.org/2000/svg"
+                      width="100%" height="100%" viewBox="0 0 22 34"
+                      preserveAspectRatio="xMidYMax meet">
+                   <ellipse cx="11" cy="33" rx="5" ry="1.5"
+                            fill="rgba(0,0,0,0.4)"/>
+                   <path d="M11 1C5.48 1 1 5.48 1 11
+                            c0 7.18 10 22 10 22S21 18.18 21 11
+                            C21 5.48 16.52 1 11 1z"
+                         fill="#c9922a" stroke="#7a5c1e" stroke-width="1.5"/>
+                   <circle cx="11" cy="11" r="4"
+                           fill="#1e160a" opacity="0.75"/>
+                 </svg>`,
+          className:   '',
+          iconSize:    scalePair([22, 34], s),
+          iconAnchor:  scalePair([11, 34], s),
+          popupAnchor: scalePair(popupAnchor, s),
+        });
+      }
+
       return L.icon({
         iconUrl:     m.icon,
-        iconSize:    m.iconSize    || [32, 32],
-        iconAnchor:  m.iconAnchor  || [16, 32],
-        popupAnchor: [0, -36],
+        iconSize:    scalePair(m.iconSize   || [32, 32], s),
+        iconAnchor:  scalePair(m.iconAnchor || [16, 32], s),
+        popupAnchor: scalePair(popupAnchor, s),
       });
     }
 
@@ -258,6 +270,7 @@
     const imageBounds = [[0, 0], [MAP_H, MAP_W]];
     L.imageOverlay('img/map.jpg', imageBounds).addTo(map);
     map.fitBounds(imageBounds);
+    const BASE_ZOOM = map.getZoom();
     map.setMaxBounds([[-300, -300], [MAP_H + 300, MAP_W + 300]]);
 
     // ── FIX #4 — Shift+click for coordinates (no clipboard spam) ─
@@ -301,6 +314,21 @@
         className:  perm ? 'map-label-permanent' : 'map-label',
       });
     }
+
+    const markerRegistry = [];
+
+    function getIconScale() {
+      return Math.pow(2, map.getZoom() - BASE_ZOOM);
+    }
+
+    function refreshMarkerIcons() {
+      const scale = getIconScale();
+      markerRegistry.forEach(function (entry) {
+        entry.marker.setIcon(makeIcon(entry.data, scale));
+      });
+    }
+
+    map.on('zoomend', refreshMarkerIcons);
 
     // ── FIX #3 — Polygon / polyline renderers ─────────────────────
     //
@@ -465,12 +493,13 @@
 
     function renderMarker(m) {
       const marker = L.marker(px(m.x, m.y), {
-        icon:  makeIcon(m),
+        icon:  makeIcon(m, getIconScale()),
         title: m.name,
       }).addTo(map);
 
       marker.bindPopup(popupHTML(m), { maxWidth: 300, minWidth: 200 });
       bindLabel(marker, m);
+      markerRegistry.push({ marker: marker, data: m });
     }
 
     // ── Dispatch all entries in markers.js ────────────────────────
@@ -479,6 +508,8 @@
       else if (m.type === 'polyline') renderPolyline(m);
       else                            renderMarker(m);
     });
+
+    refreshMarkerIcons();
   </script>
 </body>
 </html>
