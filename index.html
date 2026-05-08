@@ -1,1 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      background: #0e0c08;
+      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+    }
+
+    #map {
+      width: 100vw;
+      height: 100vh;
+      background: #0e0c08;
+    }
+
+    /* ── Popup styling ── */
+    .leaflet-popup-content-wrapper {
+      background: #1e160a;
+      border: 1px solid #7a5c1e;
+      border-radius: 3px;
+      color: #ede0c4;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    }
+    .leaflet-popup-tip-container { display: none; }  /* cleaner without the arrow */
+    .leaflet-popup-close-button { color: #7a5c1e !important; font-size: 18px !important; }
+
+    .leaflet-popup-content {
+      margin: 14px 18px;
+      min-width: 200px;
+      max-width: 280px;
+    }
+    .leaflet-popup-content h3 {
+      color: #c9922a;
+      font-size: 1.05em;
+      margin-bottom: 7px;
+      letter-spacing: 0.04em;
+    }
+    .leaflet-popup-content p {
+      font-size: 0.88em;
+      line-height: 1.55;
+      color: #d5c9b0;
+      margin-bottom: 12px;
+    }
+    .popup-link {
+      display: inline-block;
+      color: #c9922a;
+      text-decoration: none;
+      border: 1px solid #7a5c1e;
+      padding: 4px 12px;
+      font-size: 0.82em;
+      letter-spacing: 0.05em;
+      transition: background 0.15s, color 0.15s;
+    }
+    .popup-link:hover { background: #7a5c1e; color: #fff; }
+
+    /* ── Hover label (tooltip) styling ── */
+    .leaflet-tooltip.map-label {
+      background: rgba(14, 10, 4, 0.82);
+      border: 1px solid #7a5c1e;
+      color: #ede0c4;
+      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      font-size: 0.78em;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      white-space: nowrap;
+      box-shadow: none;
+    }
+    .leaflet-tooltip.map-label::before { display: none; }
+
+    /* ── Permanent label (always visible) ── */
+    .leaflet-tooltip.map-label-permanent {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      color: #ede0c4;
+      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      font-size: 0.75em;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 3px #000, 0 0 6px #000;
+      font-weight: normal;
+      white-space: nowrap;
+    }
+    .leaflet-tooltip.map-label-permanent::before { display: none; }
+
+    /* ── Dev coordinate readout ── */
+    #dev-coords {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.72);
+      color: #c9922a;
+      padding: 5px 11px;
+      font-family: monospace;
+      font-size: 11px;
+      z-index: 9999;
+      pointer-events: none;
+      border: 1px solid #3a2a0a;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+  <div id="dev-coords">↖ Click anywhere on the map to get pixel coordinates</div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="markers.js"></script>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    //  MAP CONFIGURATION — edit these if your image size changes
+    // ═══════════════════════════════════════════════════════════════
+    const MAP_W = 941;
+    const MAP_H = 1671;
+
+    // ── Coordinate conversion ─────────────────────────────────────
+    // Leaflet CRS.Simple uses [lat, lng] = [y_from_bottom, x_from_left].
+    // We work in pixel coords (0,0 at TOP-LEFT) to stay human-friendly.
+    function px(pixelX, pixelY) {
+      return L.latLng(MAP_H - pixelY, pixelX);
+    }
+
+    // ── Initialise map ────────────────────────────────────────────
+    const map = L.map('map', {
+      crs:              L.CRS.Simple,
+      minZoom:          -2,
+      maxZoom:          4,
+      zoomSnap:         0.25,
+      zoomDelta:        0.5,
+      attributionControl: false,
+      zoomControl:      true,
+    });
+
+    const imageBounds = [[0, 0], [MAP_H, MAP_W]];
+    L.imageOverlay('img/map.jpg', imageBounds).addTo(map);
+    map.fitBounds(imageBounds);
+
+    // Prevent panning far outside the image
+    const padded = [[-300, -300], [MAP_H + 300, MAP_W + 300]];
+    map.setMaxBounds(padded);
+
+    // ── Dev: click to show coordinates ───────────────────────────
+    const coordsEl = document.getElementById('dev-coords');
+    map.on('click', function (e) {
+      const pixelX = Math.round(e.latlng.lng);
+      const pixelY = Math.round(MAP_H - e.latlng.lat);
+      coordsEl.textContent = `x: ${pixelX},  y: ${pixelY}`;
+      // Also copy to clipboard for convenience
+      navigator.clipboard?.writeText(`x: ${pixelX}, y: ${pixelY}`).catch(() => {});
+    });
+
+    // ── Render markers from markers.js ────────────────────────────
+    MARKERS.forEach(function (m) {
+
+      // Icon
+      const iconOptions = {
+        iconUrl:    m.icon       || 'img/icons/default.png',
+        iconSize:   m.iconSize   || [32, 32],
+        iconAnchor: m.iconAnchor || [16, 32],
+        popupAnchor: [0, -36],
+      };
+      const icon = L.icon(iconOptions);
+
+      // Marker
+      const marker = L.marker(px(m.x, m.y), { icon, title: m.name }).addTo(map);
+
+      // Popup
+      const linkHtml = m.link
+        ? `<a class="popup-link" href="${m.link}">Read more →</a>`
+        : '';
+
+      marker.bindPopup(
+        `<h3>${m.name}</h3><p>${m.description}</p>${linkHtml}`,
+        { maxWidth: 300, minWidth: 200 }
+      );
+
+      // Tooltip (hover label or permanent label)
+      if (m.label !== false) {
+        const isPermanent = !!m.labelPermanent;
+        marker.bindTooltip(m.name, {
+          permanent:  isPermanent,
+          direction:  m.labelDir || 'top',
+          offset:     m.labelOffset || [0, -4],
+          className:  isPermanent ? 'map-label-permanent' : 'map-label',
+        });
+      }
+    });
+  </script>
+</body>
+</html>
