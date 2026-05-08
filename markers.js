@@ -63,7 +63,7 @@ const MARKERS = [
     name:        "Thornwick",
     x:           280,
     y:           940,
-    icon:        "img/icons/town.png",
+    icon:        "img/icons/default.png",
     description: "A river trading post known for its weekly market and questionable ale.",
     link:        "locations/thornwick.html",
   },
