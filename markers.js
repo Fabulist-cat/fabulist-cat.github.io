@@ -104,7 +104,7 @@ const MARKERS = [
     labelPermanent: true,
 
     // absolute label
-    labelPos: [350, 152],
+    labelPos: [314, 158],
 
     // top-left anchor
     labelAnchor: [0, 0],
@@ -113,7 +113,7 @@ const MARKERS = [
     labelRotation: -8,
 
     // keep same screen size
-    labelScaleWithMap: false,
+    labelScaleWithMap: true,
 
     // line thickness changes with zoom
     outlineScaleWithMap: true,
