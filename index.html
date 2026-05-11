@@ -206,7 +206,11 @@
     // Leaflet CRS.Simple = [lat, lng] = [y_from_bottom, x_from_left].
     // All our data uses pixel coords (0,0 = top-left). Conversion is:
     function px(pixelX, pixelY)   { return L.latLng(MAP_H - pixelY, pixelX); }
-    function pxPoints(pts)        { return pts.map(function(p){ return px(p[0], p[1]); }); }
+    function pxPoints(pts) {
+  return pts.map(function (p) {
+    return Array.isArray(p[0]) ? pxPoints(p) : px(p[0], p[1]);
+  });
+}
 
     // ── FIX #1 — Default icon (inline SVG, zero file dependency) ─
     //
