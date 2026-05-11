@@ -81,6 +81,7 @@ const MARKERS = [
   */
 
   // ── POLYGONS (regions) ────────────────────────────────────────────────────
+  // CITIES
 
   {
     type:        "polygon",
@@ -103,11 +104,49 @@ const MARKERS = [
 
   {
     type:        "polygon",
+    name:        "Бовемор",
+    points: [
+      [619, 127], [589, 123], [594, 98], [618, 77], [636, 103],
+    ],
+    color:       "#2d7a3a",
+    fillColor:   "#1a4a20",
+    fillOpacity: 0.18,
+    glowColor:   "#f7ee34",
+    description: "Ізольоване гірське місто мисливців на потвор",
+    link:        "locations/placeholder.html",
+    label:       false,
+    labelPermanent: false,
+    labelDir:    "right",
+    labelOffset: [35, 0]
+  },
+
+  {
+    type:        "polygon",
+    name:        "Далварт",
+    points: [
+      [487, 539], [487, 526], [493, 501], [474, 498], [459, 505], [462, 527], [468, 539],
+    ],
+    color:       "#2d7a3a",
+    fillColor:   "#1a4a20",
+    fillOpacity: 0.18,
+    glowColor:   "#f7ee34",
+    description: "Торговий центр, місто товарів та розваг.",
+    link:        "locations/placeholder.html",
+    label:       false,
+    labelPermanent: false,
+    labelDir:    "right",
+    labelOffset: [35, 0]
+  },
+
+  // OTHER
+
+  {
+    type:        "polygon",
     name:        "Ольтернес",
     points: [
      [0, 366], [32, 416], [16, 411], [111, 627], [108, 638],
      [131, 705], [134, 757], [209, 940], [185, 937], [156, 908],
-     [119, 831], [48, 755], [0, 694]
+     [119, 831], [48, 755], [0, 694],
     ],
     color:       "#2a4a7a",
     fillColor:   "#0e1e3a",
@@ -140,7 +179,25 @@ const MARKERS = [
     labelPermanent: true,
     labelDir:    "top",
   },
-  
+
+  {
+    type:        "polygon",
+    name:        "Морморас",
+    points: [
+      [565, 434], [713, 272], [697, 192], [458, 168], [341, 187]
+      [272, 216], [257, 327], [329, 416], [515, 426],
+    ],
+    color:       "#adad9c",
+    fillColor:   "#0e1e3a",
+    fillOpacity: 0.35,
+    opacity:     0.5,
+    glowColor:   "#7ca18e",
+    description: "Зелене, застійне і неприємне болото, дім різних потвор і чарівних трав.",
+    link:        "locations/placeholder.html",
+    label:       false,
+    labelPermanent: true,
+    labelDir:    "top",
+  },
 
   // ── POLYLINES (rivers, roads, …) ──────────────────────────────────────────
   /*
