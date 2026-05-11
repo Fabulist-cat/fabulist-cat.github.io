@@ -283,7 +283,7 @@
 
       const pixelX = Math.round(e.latlng.lng);
       const pixelY = Math.round(MAP_H - e.latlng.lat);
-      const text   = `x: ${pixelX}, y: ${pixelY}`;
+      const text = `[${pixelX}, ${pixelY}]`;
 
       coordsEl.textContent = text;
       coordsEl.classList.add('visible');
