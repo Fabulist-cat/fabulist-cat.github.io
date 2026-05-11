@@ -132,7 +132,7 @@ const MARKERS = [
     fillColor:   "#0e1e3a",
     fillOpacity: 0.35,
     opacity:     0.5,
-    glowColor:   "#4499ff",
+    glowColor:   "#ebebc7",
     description: "Непрохідна, вертикальна і загрозлива гірська стіна. Кажуть, колись боги боролись тут з силами зла.",
     link:        "locations/placeholder.html",
     label:       true,
