@@ -86,7 +86,7 @@ const MARKERS = [
     type:        "polygon",
     name:        "Тенемор",
     points: [
-      [279, 169], [280, 151], [295, 143],
+      [280, 169], [280, 151], [295, 143],
       [311, 149], [311, 167],
     ],
     color:       "#2d7a3a",
@@ -97,6 +97,7 @@ const MARKERS = [
     link:        "locations/placeholder.html",
     labelPermanent: true,
     labelDir:    "right",
+    labelOffset: [35, 0]
   },
 
   {
@@ -114,7 +115,9 @@ const MARKERS = [
     glowColor:   "#4499ff",
     description: "Глибока, захищена від штормів та потвор морська затока.",
     link:        "locations/placeholder.html",
-    label:       false,
+    label:       true,
+    labelPermanent: true,
+    labelDir:    "center",
   },
   
 
