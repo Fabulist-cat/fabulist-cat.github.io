@@ -47,7 +47,7 @@
     #top-nav a {
       color: #887050;
       text-decoration: none;
-      font-size: 0.8em;
+      font-size: 1.5em;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 5px 12px;
@@ -118,7 +118,7 @@
       border: 1px solid #7a5c1e;
       color: #ede0c4;
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
-      font-size: 0.78em;
+      font-size: 1.1em;
       letter-spacing: 0.06em;
       padding: 3px 8px;
       white-space: nowrap;
@@ -132,7 +132,7 @@
       box-shadow: none;
       color: #ede0c4;
       font-family: 'Palatino Linotype', Palatino, Georgia, serif;
-      font-size: 0.75em;
+      font-size: 1.1em;
       letter-spacing: 0.08em;
       text-shadow: 0 1px 4px #000, 0 0 8px #000;
       font-weight: normal;
@@ -206,7 +206,11 @@
     // Leaflet CRS.Simple = [lat, lng] = [y_from_bottom, x_from_left].
     // All our data uses pixel coords (0,0 = top-left). Conversion is:
     function px(pixelX, pixelY)   { return L.latLng(MAP_H - pixelY, pixelX); }
-    function pxPoints(pts)        { return pts.map(function(p){ return px(p[0], p[1]); }); }
+    function pxPoints(pts) {
+  return pts.map(function (p) {
+    return Array.isArray(p[0]) ? pxPoints(p) : px(p[0], p[1]);
+  });
+}
 
     // ── FIX #1 — Default icon (inline SVG, zero file dependency) ─
     //
@@ -283,7 +287,7 @@
 
       const pixelX = Math.round(e.latlng.lng);
       const pixelY = Math.round(MAP_H - e.latlng.lat);
-      const text   = `x: ${pixelX}, y: ${pixelY}`;
+      const text = `[${pixelX}, ${pixelY}]`;
 
       coordsEl.textContent = text;
       coordsEl.classList.add('visible');
