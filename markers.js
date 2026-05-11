@@ -48,6 +48,7 @@ const MARKERS = [
 
   // ── MARKERS (pins) ────────────────────────────────────────────────────────
 
+  /*
   {
     name:        "Ashenveil",
     x:           470,
@@ -77,45 +78,48 @@ const MARKERS = [
     link:        "locations/sunken-keep.html",
     labelDir:    "bottom",
   },
+  */
 
   // ── POLYGONS (regions) ────────────────────────────────────────────────────
 
   {
     type:        "polygon",
-    name:        "The Greywood",
+    name:        "Тенемор",
     points: [
-      [680, 260], [780, 240], [860, 310],
-      [840, 430], [750, 480], [660, 440],
-      [630, 360],
+      [279, 169], [280, 151], [295, 143],
+      [311, 149], [311, 167],
     ],
     color:       "#2d7a3a",
     fillColor:   "#1a4a20",
     fillOpacity: 0.18,
-    glowColor:   "#55ff88",
-    description: "An ancient forest. Locals leave offerings at the treeline and do not enter after dusk.",
-    link:        "locations/greywood.html",
+    glowColor:   "#f7ee34",
+    description: "Величне, занурене у гірську ущелину місто. Значна частина населення – гноми ",
+    link:        "locations/placeholder.html",
     labelPermanent: true,
-    labelDir:    "center",
+    labelDir:    "right",
   },
 
   {
     type:        "polygon",
-    name:        "The Ashen Sea",
+    name:        "Ольтернес",
     points: [
-      [0, 0], [280, 0], [310, 120],
-      [240, 200], [80, 220], [0, 160],
+     [0, 366], [32, 416], [16, 411], [111, 627], [108, 638],
+     [131, 705], [134, 757], [209, 940], [185, 937], [156, 908],
+     [119, 831], [48, 755], [0, 694]
     ],
     color:       "#2a4a7a",
     fillColor:   "#0e1e3a",
     fillOpacity: 0.35,
     opacity:     0.5,
     glowColor:   "#4499ff",
-    description: "Grey waters that have never known a tide. Sailors report hearing voices below the surface.",
-    link:        "locations/ashen-sea.html",
+    description: "Глибока, захищена від штормів та потвор морська затока.",
+    link:        "locations/placeholder.html",
     label:       false,
   },
+  
 
   // ── POLYLINES (rivers, roads, …) ──────────────────────────────────────────
+  /*
 
   {
     type:        "polyline",
@@ -146,6 +150,7 @@ const MARKERS = [
     description: "A pre-Shattering trade road. Still passable in dry season.",
     label:       false,
   },
+  */
 
   // ── Add your locations below ──────────────────────────────────────────────
 
