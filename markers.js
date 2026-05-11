@@ -156,7 +156,6 @@ const MARKERS = [
     description: "Глибока, захищена від штормів та потвор морська затока.",
     link:        "locations/placeholder.html",
     label:       false,
-    labelPermanent: true,
     labelDir:    "center",
   },
   
@@ -184,7 +183,7 @@ const MARKERS = [
     type:        "polygon",
     name:        "Морморас",
     points: [
-      [565, 434], [713, 272], [697, 192], [458, 168], [341, 187]
+      [565, 434], [713, 272], [697, 192], [458, 168], [341, 187],
       [272, 216], [257, 327], [329, 416], [515, 426],
     ],
     color:       "#adad9c",
@@ -195,7 +194,6 @@ const MARKERS = [
     description: "Зелене, застійне і неприємне болото, дім різних потвор і чарівних трав.",
     link:        "locations/placeholder.html",
     label:       false,
-    labelPermanent: true,
     labelDir:    "top",
   },
 
