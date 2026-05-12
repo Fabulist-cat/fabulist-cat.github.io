@@ -301,9 +301,33 @@
 
   <script src="../data.js"></script>
   <script>
-    // ── Configuration ──────────────────────────────────────────────
-    const DATA        = LOCATIONS;   // ← swap to EVENTS or PERSONALITIES on other pages
-    const EXTRA_FIELD = null;        // 'date' | 'role' | null
+        // ── Page configuration ─────────────────────────────────────────
+    // SORT:        'alpha' → A-Z by name
+    //              'date'  → numeric by hiddenDate / first number in date / end
+    // EXTRA_FIELD: shown in italic below the name (date / role / null)
+    const DATA        = LOCATIONS;
+    const EXTRA_FIELD = null;
+    const SORT        = 'alpha';
+
+    // ── Sort helpers ───────────────────────────────────────────────
+    function eventSortKey(d) {
+      if (d.hiddenDate !== undefined) return Number(d.hiddenDate);
+      if (d.date) {
+        const m = d.date.match(/-?\d+/);
+        if (m) return parseInt(m[0], 10);
+      }
+      return Infinity;
+    }
+
+    function sorted(arr) {
+      const copy = arr.slice();
+      if (SORT === 'alpha') {
+        copy.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'uk'));
+      } else if (SORT === 'date') {
+        copy.sort((a, b) => eventSortKey(a) - eventSortKey(b));
+      }
+      return copy;
+    }
 
     // ── State ──────────────────────────────────────────────────────
     let query       = '';
