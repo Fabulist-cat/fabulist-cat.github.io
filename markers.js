@@ -61,7 +61,7 @@ const MARKERS = [
       [227, 174],
     ],
     glowColor:   "#37703b",
-    description: "DESCRIPTION",
+    description: "Озерний край, що перемежовується болотяними трясовинами. Ті, хто тут сходить з дороги, може знайти цінні трави, зубатих потвор і вірну смерть.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -85,7 +85,7 @@ const MARKERS = [
       [893, 513],
     ],
     glowColor:   "#1b8722",
-    description: "DESCRIPTION",
+    description: "Густий, непрохідний ліс, населений дивними тваринами і ще дивнішими друїдами. Спроби видобувати тут деревину завжди закінчувались криваво.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -106,7 +106,7 @@ const MARKERS = [
       [30, 404],
     ],
     glowColor:   "#1b7087",
-    description: "DESCRIPTION",
+    description: "Глибока і тиха, захищена від штормів морська затока. Джерело риби, солі і торгових шляхів.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -129,7 +129,7 @@ const MARKERS = [
       [751, 213],
     ],
     glowColor:   "#3a4a43",
-    description: "DESCRIPTION",
+    description: "Величезна, прямовисна гранітна стіна, що обмежує Руймдаль з заходу. Серафи кажуть, що це наслідок прадавньої битви богів.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -148,7 +148,7 @@ const MARKERS = [
       [597, 127],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Ізольоване гірське поселення, населене хоробрими та гордими мисливцями. Пустеля, що простягнулась на захід від Увемору просто кишить потворами, а частини їх тіл завжди в ціні.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -174,7 +174,7 @@ const MARKERS = [
       [181, 964],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Найбільший морський порт Руймдалю, розташування Магічної Академії Айселнесу. Завзяте, шумне і пропахле рибою.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -196,7 +196,7 @@ const MARKERS = [
       [795, 854],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Столиця Руймдалю. Вкрита розкішною позолотою, забарвлена королівськими регаліями і презирством до приїжджих.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -218,7 +218,7 @@ const MARKERS = [
       [100, 521],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Просолене і пропахле рибою містечко, мало чим відоме, окрім як рибою, сіллю і морськими прогулянками.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -243,7 +243,7 @@ const MARKERS = [
       [510, 486],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Центральне торгове місто Руймдалю. Заможне і розгульне – принаймні для тих, хто може це собі дозволити.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -265,7 +265,7 @@ const MARKERS = [
       [940, 763],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Самотнє шахтарське місто у передгір'ях, відоме своїми самоцвітами, ювелірами та високими цінами на харчі.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -288,7 +288,7 @@ const MARKERS = [
       [826, 514],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Загублене в лісах місто друїдів. Дорога до нього добре відома, але не всіх місцеві мешканці раді бачити в своєму місті.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -314,7 +314,7 @@ const MARKERS = [
       [896, 816],
     ],
     glowColor:   "#de9910",
-    description: "DESCRIPTION",
+    description: "Невеличке поселення дорогою до Едельстона, сконцентроване навколо однойменної академії.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -335,7 +335,7 @@ const MARKERS = [
       [281, 149],
     ],
     glowColor:   "#eaed39",
-    description: "DESCRIPTION",
+    description: "Занурене в гірську розколину шахтарське і ковальське місто. Значна частина населення – гноми.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -359,7 +359,7 @@ const MARKERS = [
       [541, 527],
     ],
     glowColor:   "#de9910",
-    description: "DESCRIPTION",
+    description: "Невеличке поселення на околицях Далварту. Зручна зупинка для тих, хто не може дозволити собі міські ціни.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -384,7 +384,7 @@ const MARKERS = [
       [183, 651],
     ],
     glowColor:   "#de9910",
-    description: "DESCRIPTION",
+    description: "TBD",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
