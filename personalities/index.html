@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Персоналії</title>
   <style>
-    /* ── Reset & base ────────────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -15,7 +14,7 @@
       min-height: 100vh;
     }
 
-    /* ── Nav (identical to map page) ─────────────────────────────── */
+    /* ── Nav ─────────────────────────────────────────────────────── */
     #top-nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -74,10 +73,7 @@
       padding: 80px 32px 80px;
     }
 
-    /* ── Header ──────────────────────────────────────────────────── */
-    .page-header {
-      margin-bottom: 36px;
-    }
+    .page-header { margin-bottom: 36px; }
     .page-header h1 {
       color: #c9922a;
       font-size: 1.7em;
@@ -92,7 +88,7 @@
       font-style: italic;
     }
 
-    /* ── Controls row (search + filters) ─────────────────────────── */
+    /* ── Controls ─────────────────────────────────────────────────── */
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -101,7 +97,6 @@
       margin-bottom: 28px;
     }
 
-    /* Search */
     .search-wrap {
       position: relative;
       flex: 1 1 240px;
@@ -109,8 +104,7 @@
     }
     .search-wrap svg {
       position: absolute;
-      left: 11px;
-      top: 50%;
+      left: 11px; top: 50%;
       transform: translateY(-50%);
       opacity: 0.4;
       pointer-events: none;
@@ -129,7 +123,6 @@
     #search::placeholder { color: #4a3a20; }
     #search:focus { border-color: #7a5c1e; }
 
-    /* Category filters */
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -149,37 +142,34 @@
       border-radius: 2px;
       transition: color 0.15s, border-color 0.15s, background 0.15s;
     }
-    .filter-btn:hover {
-      color: #ede0c4;
-      border-color: #7a5c1e;
-    }
-    .filter-btn.active {
-      color: #c9922a;
-      border-color: #7a5c1e;
-      background: rgba(122,92,30,0.15);
-    }
+    .filter-btn:hover   { color: #ede0c4; border-color: #7a5c1e; }
+    .filter-btn.active  { color: #c9922a; border-color: #7a5c1e; background: rgba(122,92,30,0.15); }
 
-    /* ── Divider ─────────────────────────────────────────────────── */
+    /* ── List ─────────────────────────────────────────────────────── */
     .divider {
       border: none;
       border-top: 1px solid #1e1608;
       margin-bottom: 2px;
     }
-
-    /* ── Entry list ──────────────────────────────────────────────── */
-    #list {
-      list-style: none;
+    #count {
+      font-size: 0.75em;
+      color: #4a3a20;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+      min-height: 1.2em;
     }
+    #list { list-style: none; }
 
+    /* Each entry is a 2-column grid:
+       col 1 (1fr) : name / meta / description
+       col 2 (auto): tag stack                   */
     .entry {
       border-bottom: 1px solid #1a1208;
-      padding: 16px 4px 16px 0;
+      padding: 15px 4px 15px 0;
       display: grid;
       grid-template-columns: 1fr auto;
-      grid-template-rows: auto auto;
       column-gap: 16px;
-      row-gap: 5px;
-      cursor: default;
+      row-gap: 4px;
       position: relative;
       transition: padding-left 0.15s;
     }
@@ -195,12 +185,12 @@
     .entry:hover { padding-left: 10px; }
     .entry:hover::before { opacity: 1; }
 
+    /* col 1 rows */
     .entry-name {
       color: #ede0c4;
       font-size: 1em;
       letter-spacing: 0.04em;
-      align-self: end;
-      /* no underline by default; link styling applied via JS */
+      grid-column: 1;
     }
     .entry-name a {
       color: inherit;
@@ -209,22 +199,33 @@
     }
     .entry-name a:hover { color: #c9922a; }
 
-    /* extra field (date for events, role for personalities) */
     .entry-meta {
       color: #7a5c1e;
       font-size: 0.78em;
       letter-spacing: 0.05em;
       font-style: italic;
-      align-self: end;
       grid-column: 1;
     }
+
     .entry-desc {
       color: #a89878;
       font-size: 0.86em;
       line-height: 1.55;
-      grid-column: 1 / -1;
+      grid-column: 1;   /* stays in col 1 so tags don't get pushed down */
     }
 
+    /* col 2: tag stack — spans all rows so it's always top-aligned */
+    .entry-tags {
+      grid-column: 2;
+      grid-row: 1 / -1;       /* span every row the entry has */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      padding-top: 2px;
+    }
+
+    /* primary category tag */
     .tag {
       display: inline-block;
       font-size: 0.7em;
@@ -235,13 +236,18 @@
       padding: 2px 8px;
       border-radius: 2px;
       white-space: nowrap;
-      align-self: start;
-      grid-row: 1;
-      grid-column: 2;
-      margin-top: 2px;
     }
 
-    /* ── Empty state ─────────────────────────────────────────────── */
+    /* secondary family tag — same shape, visually quieter */
+    .tag-family {
+      color: #4e3c20;
+      border-color: #261a08;
+      font-style: italic;
+      font-size: 0.65em;
+      letter-spacing: 0.08em;
+      text-transform: none;
+    }
+
     #empty {
       display: none;
       color: #4a3a20;
@@ -249,38 +255,26 @@
       font-size: 0.9em;
       padding: 32px 4px;
     }
-
-    /* ── Result count ────────────────────────────────────────────── */
-    #count {
-      font-size: 0.75em;
-      color: #4a3a20;
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-      min-height: 1.2em;
-    }
   </style>
 </head>
 <body>
 
-  <!-- ── Nav ─────────────────────────────────────────────────────── -->
   <nav id="top-nav">
     <a href="../index.html" class="nav-title">Мапа</a>
     <div class="nav-sep"></div>
-    <a href="../locations/index.html" class="nav-link">Місця</a>
-    <a href="../events/index.html"    class="nav-link">Події</a>
+    <a href="../locations/index.html"     class="nav-link">Місця</a>
+    <a href="../events/index.html"        class="nav-link">Події</a>
     <a href="../personalities/index.html" class="nav-link active">Персоналії</a>
   </nav>
 
   <main class="page">
-
     <header class="page-header">
       <h1>Персоналії</h1>
-      <p>Люди, жаби та гриби цього світу</p>
+      <p>Особистості, які формують цей світ</p>
     </header>
 
     <div class="controls">
       <div class="search-wrap">
-        <!-- search icon -->
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
              xmlns="http://www.w3.org/2000/svg">
           <circle cx="6" cy="6" r="4.5" stroke="#c9922a" stroke-width="1.4"/>
@@ -296,20 +290,44 @@
     <div id="count"></div>
     <ul id="list"></ul>
     <p id="empty">Нічого не знайдено.</p>
-
   </main>
 
   <script src="../data.js"></script>
   <script>
-    // ── Configuration ──────────────────────────────────────────────
+    // ── Page configuration ─────────────────────────────────────────
+    // SORT:        'alpha' → A-Z by name
+    //              'date'  → numeric by hiddenDate / first number in date / end
+    // EXTRA_FIELD: shown in italic below the name (date / role / null)
     const DATA        = PERSONALITIES;
     const EXTRA_FIELD = 'role';
+    const SORT        = 'alpha';
+
+    // ── Sort helpers ───────────────────────────────────────────────
+    function eventSortKey(d) {
+      if (d.hiddenDate !== undefined) return Number(d.hiddenDate);
+      if (d.date) {
+        const m = d.date.match(/-?\d+/);
+        if (m) return parseInt(m[0], 10);
+      }
+      return Infinity;
+    }
+
+    function sorted(arr) {
+      const copy = arr.slice();
+      if (SORT === 'alpha') {
+        copy.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'uk'));
+      } else if (SORT === 'date') {
+        copy.sort((a, b) => eventSortKey(a) - eventSortKey(b));
+      }
+      return copy;
+    }
 
     // ── State ──────────────────────────────────────────────────────
-    let query       = '';
+    let query          = '';
     let activeCategory = 'all';
 
-    // ── Build category list ────────────────────────────────────────
+    // ── Category filter buttons ────────────────────────────────────
+    // Built from unique values of category — family is intentionally excluded.
     const categories = ['all', ...new Set(DATA.map(d => d.category).filter(Boolean))];
 
     const filtersEl = document.getElementById('filters');
@@ -327,7 +345,6 @@
       filtersEl.appendChild(btn);
     });
 
-    // ── Search ─────────────────────────────────────────────────────
     document.getElementById('search').addEventListener('input', function () {
       query = this.value.toLowerCase();
       render();
@@ -341,49 +358,39 @@
     function render() {
       const q = query.trim();
 
-      const filtered = DATA.filter(function (d) {
+      // 1. Filter
+      const filtered = sorted(DATA).filter(function (d) {
         const matchCat = activeCategory === 'all' || d.category === activeCategory;
         if (!matchCat) return false;
         if (!q) return true;
-        return (d.name        || '').toLowerCase().includes(q)
-            || (d.description || '').toLowerCase().includes(q)
-            || (d.category    || '').toLowerCase().includes(q)
-            || (d[EXTRA_FIELD]|| '').toLowerCase().includes(q);
+        // Search: name, description, category, family, extra field
+        return [d.name, d.description, d.category, d.family, d[EXTRA_FIELD]]
+          .some(v => v && v.toLowerCase().includes(q));
       });
 
-      listEl.innerHTML  = '';
+      // 2. Count
       const total = DATA.filter(d =>
         activeCategory === 'all' || d.category === activeCategory).length;
-
       countEl.textContent = q
         ? `${filtered.length} з ${total}`
-        : (total === DATA.length ? `${total} записів` : `${filtered.length} записів`);
+        : `${total} записів`;
 
-      if (filtered.length === 0) {
-        emptyEl.style.display = 'block';
-        return;
-      }
-      emptyEl.style.display = 'none';
+      // 3. Draw
+      listEl.innerHTML  = '';
+      emptyEl.style.display = filtered.length === 0 ? 'block' : 'none';
 
       filtered.forEach(function (d) {
         const li = document.createElement('li');
         li.className = 'entry';
 
-        // Name — linked if d.link exists
+        // — Name (linked or plain)
         const nameEl = document.createElement('div');
         nameEl.className = 'entry-name';
-        if (d.link) {
-          nameEl.innerHTML = `<a href="../${d.link}">${d.name}</a>`;
-        } else {
-          nameEl.textContent = d.name;
-        }
+        nameEl.innerHTML = d.link
+          ? `<a href="../${d.link}">${d.name}</a>`
+          : d.name;
 
-        // Tag
-        const tagEl = document.createElement('span');
-        tagEl.className   = 'tag';
-        tagEl.textContent = d.category;
-
-        // Extra field (date / role)
+        // — Extra field (date / role) — shown only if EXTRA_FIELD is set
         let metaEl = null;
         if (EXTRA_FIELD && d[EXTRA_FIELD]) {
           metaEl = document.createElement('div');
@@ -391,15 +398,32 @@
           metaEl.textContent = d[EXTRA_FIELD];
         }
 
-        // Description
+        // — Description
         const descEl = document.createElement('div');
         descEl.className   = 'entry-desc';
         descEl.textContent = d.description || '';
 
+        // — Tag stack (col 2): primary category + optional family
+        const tagsEl = document.createElement('div');
+        tagsEl.className = 'entry-tags';
+
+        const catTag = document.createElement('span');
+        catTag.className   = 'tag';
+        catTag.textContent = d.category;
+        tagsEl.appendChild(catTag);
+
+        if (d.family) {
+          const famTag = document.createElement('span');
+          famTag.className   = 'tag tag-family';
+          famTag.textContent = d.family;
+          tagsEl.appendChild(famTag);
+        }
+
+        // — Assemble
         li.appendChild(nameEl);
-        li.appendChild(tagEl);
         if (metaEl) li.appendChild(metaEl);
         li.appendChild(descEl);
+        li.appendChild(tagsEl);   // col 2 — order in DOM doesn't matter for grid
         listEl.appendChild(li);
       });
     }
