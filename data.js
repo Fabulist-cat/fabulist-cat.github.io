@@ -39,31 +39,41 @@ const LOCATIONS = [
 // ── EVENTS ────────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-
+ 
   {
-    name:        "Приклад події",
-    category:    "Війна",
-    date:        "давно",
-    description: "Короткий опис події. Тут може бути одне-два речення.",
+    name:        "Заснування Тенемору",
+    category:    "Заснування",
+    date:        "1-й рік Нової Ери",
+    description: "Гномський клан Дурін спустився в ущелину та заклав перші камені міста.",
     link:        "locations/placeholder.html",
   },
-
+ 
+  {
+    name:        "Велика Тиша",
+    category:    "Криза",
+    date:        "До початку літочислення",
+    hiddenDate:  -9999,   // ← no number in date string; sort manually
+    description: "Епоха, про яку збереглися лише уламки переказів.",
+    link:        "locations/placeholder.html",
+  },
+ 
   // ── Add events below ──────────────────────────────────────────────────────
-
+ 
 ];
 
 // ── PERSONALITIES ─────────────────────────────────────────────────────────────
 
 const PERSONALITIES = [
-
+ 
   {
-    name:        "Приклад персонажа",
-    category:    "NPC",
-    role:        "Торговець",
+    name:        "Каніс фон Доберманн",
+    category:    "Торговець",
+    role:        "Власник Собак фон Доберманна",
+    family:      "фон Доберманн",
     description: "Короткий опис персонажа. Одне-два речення про те, хто це.",
     link:        "locations/placeholder.html",
   },
-
+ 
   // ── Add personalities below ───────────────────────────────────────────────
-
+ 
 ];
