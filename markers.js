@@ -48,7 +48,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_1",
+    name:        "Морморас",
     points: [
       [144, 211],
       [155, 249],
@@ -60,7 +60,7 @@ const MARKERS = [
       [619, 172],
       [227, 174],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#37703b",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -69,7 +69,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_2",
+    name:        "Годенбос",
     points: [
       [864, 376],
       [719, 404],
@@ -84,7 +84,7 @@ const MARKERS = [
       [845, 680],
       [893, 513],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#1b8722",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -93,7 +93,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_3",
+    name:        "Ольтернес",
     points: [
       [0, 354],
       [0, 697],
@@ -105,7 +105,7 @@ const MARKERS = [
       [11, 419],
       [30, 404],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#1b7087",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -114,14 +114,11 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_4",
+    name:        "Увемор",
     points: [
       [761, 195],
       [743, 154],
-      [603, 129],
-      [628, 117],
-      [614, 82],
-      [597, 127],
+      [599, 131],
       [281, 122],
       [121, 201],
       [258, 170],
@@ -131,7 +128,26 @@ const MARKERS = [
       [720, 185],
       [751, 213],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#3a4a43",
+    description: "DESCRIPTION",
+    link:        "locations/placeholder.html",
+    label:       false,
+    labelPermanent: false
+  },
+
+   {
+    type:        "polygon",
+    name:        "Бовемор",
+    points: [
+      [603, 129],
+      [628, 117],
+      [625, 100],
+      [617, 83],
+      [595, 103],
+      [589, 121],
+      [597, 127],
+    ],
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -140,7 +156,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_5",
+    name:        "Айселнес",
     points: [
       [169, 976],
       [172, 999],
@@ -157,7 +173,7 @@ const MARKERS = [
       [181, 949],
       [181, 964],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -166,7 +182,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_6",
+    name:        "Далфарос",
     points: [
       [730, 852],
       [724, 860],
@@ -179,7 +195,7 @@ const MARKERS = [
       [801, 858],
       [795, 854],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -188,7 +204,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_7",
+    name:        "Зауторм",
     points: [
       [87, 522],
       [84, 536],
@@ -201,7 +217,7 @@ const MARKERS = [
       [147, 530],
       [100, 521],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -210,7 +226,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_8",
+    name:        "Далварт",
     points: [
       [504, 482],
       [482, 480],
@@ -226,7 +242,7 @@ const MARKERS = [
       [511, 494],
       [510, 486],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -235,7 +251,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_9",
+    name:        "Едельстон",
     points: [
       [940, 717],
       [924, 713],
@@ -248,7 +264,7 @@ const MARKERS = [
       [934, 768],
       [940, 763],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -257,7 +273,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_10",
+    name:        "Годенбос",
     points: [
       [812, 500],
       [800, 497],
@@ -271,7 +287,7 @@ const MARKERS = [
       [826, 527],
       [826, 514],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -280,7 +296,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_11",
+    name:        "Вахтаддер",
     points: [
       [906, 808],
       [906, 800],
@@ -297,7 +313,7 @@ const MARKERS = [
       [884, 812],
       [896, 816],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#de9910",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -306,7 +322,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_12",
+    name:        "Тенемор",
     points: [
       [276, 158],
       [276, 165],
@@ -318,7 +334,7 @@ const MARKERS = [
       [288, 143],
       [281, 149],
     ],
-    glowColor:   "#000000",
+    glowColor:   "92b30e",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -327,7 +343,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_13",
+    name:        "Увекам",
     points: [
       [537, 533],
       [538, 538],
@@ -342,7 +358,7 @@ const MARKERS = [
       [565, 525],
       [541, 527],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#de9910",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
@@ -351,7 +367,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_14",
+    name:        "Вайм",
     points: [
       [183, 656],
       [187, 660],
@@ -367,7 +383,7 @@ const MARKERS = [
       [186, 647],
       [183, 651],
     ],
-    glowColor:   "#000000",
+    glowColor:   "#de9910",
     description: "DESCRIPTION",
     link:        "locations/placeholder.html",
     label:       false,
