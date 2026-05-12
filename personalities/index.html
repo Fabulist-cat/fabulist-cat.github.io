@@ -216,13 +216,7 @@
 
     /* col 2: tag stack — spans all rows so it's always top-aligned */
     .entry-tags {
-      grid-column: 2;
-      grid-row: 1 / -1;       /* span every row the entry has */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 5px;
-      padding-top: 2px;
+      display: contents;
     }
 
     /* primary category tag */
@@ -236,16 +230,23 @@
       padding: 2px 8px;
       border-radius: 2px;
       white-space: nowrap;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+      margin-top: 2px;
     }
 
     /* secondary family tag — same shape, visually quieter */
     .tag-family {
-      color: #4e3c20;
-      border-color: #261a08;
+      color: #7a5c1e;
+      border-color: #3a2a0a;
       font-style: italic;
       font-size: 0.65em;
       letter-spacing: 0.08em;
       text-transform: none;
+      grid-column: 2;
+      grid-row: 2;
+      align-self: start;
     }
 
     #empty {
