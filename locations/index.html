@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Локації</title>
+  <style>
+    /* ── Reset & base ────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0e0c08;
+      color: #ede0c4;
+      font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* ── Nav (identical to map page) ─────────────────────────────── */
+    #top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      background: linear-gradient(to bottom, rgba(10,7,3,0.97), rgba(10,7,3,0.75));
+      border-bottom: 1px solid #2e2010;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 4px;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+    #top-nav .nav-title {
+      color: #c9922a;
+      font-size: 0.88em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-right: 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    #top-nav .nav-sep {
+      width: 1px; height: 18px;
+      background: #2e2010;
+      margin: 0 14px 0 10px;
+      flex-shrink: 0;
+    }
+    #top-nav a.nav-link {
+      color: #887050;
+      text-decoration: none;
+      font-size: 0.8em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    #top-nav a.nav-link:hover {
+      color: #ede0c4;
+      border-color: #3a2a0a;
+      background: rgba(58,42,10,0.25);
+    }
+    #top-nav a.nav-link.active {
+      color: #c9922a;
+      border-color: #7a5c1e;
+    }
+
+    /* ── Page layout ─────────────────────────────────────────────── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 32px 80px;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────── */
+    .page-header {
+      margin-bottom: 36px;
+    }
+    .page-header h1 {
+      color: #c9922a;
+      font-size: 1.7em;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .page-header p {
+      color: #7a5c1e;
+      font-size: 0.85em;
+      font-style: italic;
+    }
+
+    /* ── Controls row (search + filters) ─────────────────────────── */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    /* Search */
+    .search-wrap {
+      position: relative;
+      flex: 1 1 240px;
+      max-width: 360px;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      background: #130f08;
+      border: 1px solid #2e2010;
+      color: #ede0c4;
+      font-family: inherit;
+      font-size: 0.85em;
+      padding: 8px 12px 8px 34px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #search::placeholder { color: #4a3a20; }
+    #search:focus { border-color: #7a5c1e; }
+
+    /* Category filters */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #2e2010;
+      color: #7a6040;
+      font-family: inherit;
+      font-size: 0.75em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .filter-btn:hover {
+      color: #ede0c4;
+      border-color: #7a5c1e;
+    }
+    .filter-btn.active {
+      color: #c9922a;
+      border-color: #7a5c1e;
+      background: rgba(122,92,30,0.15);
+    }
+
+    /* ── Divider ─────────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid #1e1608;
+      margin-bottom: 2px;
+    }
+
+    /* ── Entry list ──────────────────────────────────────────────── */
+    #list {
+      list-style: none;
+    }
+
+    .entry {
+      border-bottom: 1px solid #1a1208;
+      padding: 16px 4px 16px 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 16px;
+      row-gap: 5px;
+      cursor: default;
+      position: relative;
+      transition: padding-left 0.15s;
+    }
+    .entry::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: #7a5c1e;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .entry:hover { padding-left: 10px; }
+    .entry:hover::before { opacity: 1; }
+
+    .entry-name {
+      color: #ede0c4;
+      font-size: 1em;
+      letter-spacing: 0.04em;
+      align-self: end;
+      /* no underline by default; link styling applied via JS */
+    }
+    .entry-name a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .entry-name a:hover { color: #c9922a; }
+
+    /* extra field (date for events, role for personalities) */
+    .entry-meta {
+      color: #7a5c1e;
+      font-size: 0.78em;
+      letter-spacing: 0.05em;
+      font-style: italic;
+      align-self: end;
+      grid-column: 1;
+    }
+    .entry-desc {
+      color: #a89878;
+      font-size: 0.86em;
+      line-height: 1.55;
+      grid-column: 1 / -1;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7a5c1e;
+      border: 1px solid #3a2a0a;
+      padding: 2px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+      align-self: start;
+      grid-row: 1;
+      grid-column: 2;
+      margin-top: 2px;
+    }
+
+    /* ── Empty state ─────────────────────────────────────────────── */
+    #empty {
+      display: none;
+      color: #4a3a20;
+      font-style: italic;
+      font-size: 0.9em;
+      padding: 32px 4px;
+    }
+
+    /* ── Result count ────────────────────────────────────────────── */
+    #count {
+      font-size: 0.75em;
+      color: #4a3a20;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────── -->
+  <nav id="top-nav">
+    <a href="../index.html" class="nav-title">The Map</a>
+    <div class="nav-sep"></div>
+    <a href="../locations/index.html" class="nav-link active">Locations</a>
+    <a href="../events/index.html"    class="nav-link">Events</a>
+    <a href="../personalities/index.html" class="nav-link">Personalities</a>
+  </nav>
+
+  <main class="page">
+
+    <header class="page-header">
+      <h1>Локації</h1>
+      <p>Місця, що існують — або існували — на цій карті</p>
+    </header>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <!-- search icon -->
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="6" r="4.5" stroke="#c9922a" stroke-width="1.4"/>
+          <line x1="9.5" y1="9.5" x2="13" y2="13"
+                stroke="#c9922a" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <input id="search" type="text" placeholder="Пошук…" autocomplete="off" />
+      </div>
+      <div class="filters" id="filters"></div>
+    </div>
+
+    <hr class="divider" />
+    <div id="count"></div>
+    <ul id="list"></ul>
+    <p id="empty">Нічого не знайдено.</p>
+
+  </main>
+
+  <script src="../data.js"></script>
+  <script>
+    // ── Configuration ──────────────────────────────────────────────
+    const DATA        = LOCATIONS;   // ← swap to EVENTS or PERSONALITIES on other pages
+    const EXTRA_FIELD = null;        // 'date' | 'role' | null
+
+    // ── State ──────────────────────────────────────────────────────
+    let query       = '';
+    let activeCategory = 'all';
+
+    // ── Build category list ────────────────────────────────────────
+    const categories = ['all', ...new Set(DATA.map(d => d.category).filter(Boolean))];
+
+    const filtersEl = document.getElementById('filters');
+    categories.forEach(function (cat) {
+      const btn = document.createElement('button');
+      btn.className   = 'filter-btn' + (cat === 'all' ? ' active' : '');
+      btn.textContent = cat === 'all' ? 'Усі' : cat;
+      btn.dataset.cat = cat;
+      btn.addEventListener('click', function () {
+        activeCategory = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      });
+      filtersEl.appendChild(btn);
+    });
+
+    // ── Search ─────────────────────────────────────────────────────
+    document.getElementById('search').addEventListener('input', function () {
+      query = this.value.toLowerCase();
+      render();
+    });
+
+    // ── Render ─────────────────────────────────────────────────────
+    const listEl  = document.getElementById('list');
+    const emptyEl = document.getElementById('empty');
+    const countEl = document.getElementById('count');
+
+    function render() {
+      const q = query.trim();
+
+      const filtered = DATA.filter(function (d) {
+        const matchCat = activeCategory === 'all' || d.category === activeCategory;
+        if (!matchCat) return false;
+        if (!q) return true;
+        return (d.name        || '').toLowerCase().includes(q)
+            || (d.description || '').toLowerCase().includes(q)
+            || (d.category    || '').toLowerCase().includes(q)
+            || (d[EXTRA_FIELD]|| '').toLowerCase().includes(q);
+      });
+
+      listEl.innerHTML  = '';
+      const total = DATA.filter(d =>
+        activeCategory === 'all' || d.category === activeCategory).length;
+
+      countEl.textContent = q
+        ? `${filtered.length} з ${total}`
+        : (total === DATA.length ? `${total} записів` : `${filtered.length} записів`);
+
+      if (filtered.length === 0) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      filtered.forEach(function (d) {
+        const li = document.createElement('li');
+        li.className = 'entry';
+
+        // Name — linked if d.link exists
+        const nameEl = document.createElement('div');
+        nameEl.className = 'entry-name';
+        if (d.link) {
+          nameEl.innerHTML = `<a href="../${d.link}">${d.name}</a>`;
+        } else {
+          nameEl.textContent = d.name;
+        }
+
+        // Tag
+        const tagEl = document.createElement('span');
+        tagEl.className   = 'tag';
+        tagEl.textContent = d.category;
+
+        // Extra field (date / role)
+        let metaEl = null;
+        if (EXTRA_FIELD && d[EXTRA_FIELD]) {
+          metaEl = document.createElement('div');
+          metaEl.className   = 'entry-meta';
+          metaEl.textContent = d[EXTRA_FIELD];
+        }
+
+        // Description
+        const descEl = document.createElement('div');
+        descEl.className   = 'entry-desc';
+        descEl.textContent = d.description || '';
+
+        li.appendChild(nameEl);
+        li.appendChild(tagEl);
+        if (metaEl) li.appendChild(metaEl);
+        li.appendChild(descEl);
+        listEl.appendChild(li);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
