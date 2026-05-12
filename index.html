@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Map</title>
+  <title>Руймдаль</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -183,9 +183,9 @@
   <nav id="top-nav">
     <span class="nav-title">The Map</span>
     <div class="nav-sep"></div>
-    <a href="locations/index.html">Locations</a>
-    <a href="events/index.html">Events</a>
-    <a href="personalities/index.html">Personalities</a>
+    <a href="locations/index.html">Місця</a>
+    <a href="events/index.html">Події</a>
+    <a href="personalities/index.html">Персоналії</a>
   </nav>
 
   <div id="map"></div>
@@ -304,7 +304,7 @@
     // ── Shared helpers ────────────────────────────────────────────
     function popupHTML(m) {
       const link = m.link
-        ? `<a class="popup-link" href="${m.link}">Read more →</a>` : '';
+        ? `<a class="popup-link" href="${m.link}">Детальніше →</a>` : '';
       return `<h3>${m.name}</h3><p>${m.description || ''}</p>${link}`;
     }
 
