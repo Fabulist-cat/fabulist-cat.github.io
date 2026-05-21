@@ -271,7 +271,7 @@
     });
 
     const imageBounds = [[0, 0], [MAP_H, MAP_W]];
-    L.imageOverlay('img/map.jpg', imageBounds).addTo(map);
+    L.imageOverlay('img/map.png', imageBounds).addTo(map);
     map.fitBounds(imageBounds);
     const BASE_ZOOM = map.getZoom();
     map.setMaxBounds([[-300, -300], [MAP_H + 300, MAP_W + 300]]);
