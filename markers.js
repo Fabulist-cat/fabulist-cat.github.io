@@ -538,7 +538,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_9",
+    name:        "Кудланд",
     points: [
       [7960, 15061],
       [7962, 15150],
@@ -570,8 +570,8 @@ const MARKERS = [
       [7982, 14940],
       [7966, 14992],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#5f1f9c",
+    description: "Кудланд, далека і маловідома східна країна, є джерелом прянощів, шовку, рідкісних трав і товарів, що рівно цінуються в Руймдалі та королівствах Естани",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
