@@ -48,7 +48,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_1",
+    name:        "Рандійські гори",
     points: [
       [10872, 2284],
       [10465, 2474],
@@ -102,8 +102,8 @@ const MARKERS = [
       [11731, 2406],
       [11549, 2311],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#262407",
+    description: "Рандійські гори обмежують Руймдал з півночі. Про те, що лежить за ними, відомо мало, проте кажуть, що там мало що є, окрім нових гір та криги.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -111,7 +111,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_2",
+    name:        "Тусерузький хребет",
     points: [
       [5770, 5069],
       [5543, 5068],
@@ -156,8 +156,8 @@ const MARKERS = [
       [6150, 5317],
       [5913, 5118],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#262407",
+    description: "Гори Тусеруз ділять Руймдал надвоє. Колись вони розділяли королівства Північного Руймдалю та Трентону, але зараз слугують лиш перепоною для торгівлі. Перевали тут рідкісні та відомі лише місцевим мешканцям.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -165,7 +165,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_3",
+    name:        "Морморас",
     points: [
       [8555, 1669],
       [8507, 1540],
@@ -221,8 +221,8 @@ const MARKERS = [
       [8268, 2285],
       [8530, 1865],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#407016",
+    description: "Величезне болото, в яке впадає Едельстром і з якого витікає Ольтерстром. Якщо зійти тут з дороги, можна знайти рідкісні трави, потворних істот і вірну смерть.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -230,7 +230,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_4",
+    name:        "Міртмер",
     points: [
       [3, 2450],
       [0, 11873],
@@ -253,8 +253,8 @@ const MARKERS = [
       [644, 3013],
       [385, 2679],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#1b6ba1",
+    description: "Неозоре і небезпечне море, за яким лежить Естана, континент, погрузлий у вічній війні, і, завдяки цьому, основний торговий партнер Руймдалю.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -262,7 +262,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_5",
+    name:        "Ліс Годен",
     points: [
       [9999, 3129],
       [9876, 3108],
@@ -320,8 +320,8 @@ const MARKERS = [
       [10010, 3633],
       [10098, 3284],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#1ba138",
+    description: "Густий і прадавній листвяний ліс, який давно пав би під тиском руймдальської індустріалізації, якби не впертий захист друїдів, що живуть в його серці.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -329,7 +329,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_6",
+    name:        "Фароський ліс",
     points: [
       [8385, 8522],
       [8331, 8567],
@@ -391,8 +391,8 @@ const MARKERS = [
       [8488, 8551],
       [8438, 8520],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#1ba138",
+    description: "Старий ліс, що рік за роком зменшується завдяки постійній потребі в деревині. Кажуть, що періодично лісоруби знаходять під корінням руїни давніших поселень, проте формальних експедицій так і не було організовано.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -400,7 +400,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_7",
+    name:        "Ольтернес",
     points: [
       [574, 5561],
       [460, 5789],
@@ -452,8 +452,8 @@ const MARKERS = [
       [1281, 5285],
       [1153, 5263],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#1b6ba1",
+    description: "Глибока і тиха затока, що слугує природним захистом від штормів Міртмера, і була одним з головних факторів торгового успіху Руймдалю.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -461,7 +461,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_8",
+    name:        "Увемор",
     points: [
       [8777, 1227],
       [8677, 1121],
@@ -529,8 +529,8 @@ const MARKERS = [
       [8630, 1782],
       [8735, 1694],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#262407",
+    description: "Прямовисна стіна сірого граніту, що слугує західним кордоном Руймдалю. Кажуть, це спадок прадавньої битви богів. По той бік Увемору простяглась Хижа Пустеля, сповнена лиховісних і вічно голодних істот.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -579,7 +579,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_10",
+    name:        "Айселнес",
     points: [
       [2575, 8617],
       [2532, 8648],
@@ -642,8 +642,8 @@ const MARKERS = [
       [2661, 8643],
       [2635, 8615],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Колись – столиця Трентону, а нині – друге за розміром місто Руймдалю, Айселнес є найбільшим портом королівства, і користується всіма перевагами цього статусу і статку. Трохи остронь стоїть Магічна академія Айселнесу, позначена величезною вежою чарівного маяка.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -651,7 +651,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_11",
+    name:        "Едельстон",
     points: [
       [10139, 6137],
       [10132, 6163],
@@ -695,8 +695,8 @@ const MARKERS = [
       [10180, 6091],
       [10152, 6115],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Далеке гірське поселення, відоме своїми самоцвітами та ювелірами, а також пекельними умовами праці для тих, хто ці камені відобуває.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -704,7 +704,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_12",
+    name:        "Далфарос",
     points: [
       [9477, 7650],
       [9433, 7633],
@@ -749,8 +749,8 @@ const MARKERS = [
       [9514, 7702],
       [9500, 7673],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Славетна столиця Руймдалю, розташована на пагорбі, обнесена стінами, і розпухла на торговцях, що прямують в далекий Кудланд. На північ від столичних стін розташувалась не менш славетна Королівська академія магії Руймдалю.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -758,7 +758,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_13",
+    name:        "Годенбос",
     points: [
       [9431, 4267],
       [9370, 4257],
@@ -806,8 +806,8 @@ const MARKERS = [
       [9481, 4322],
       [9456, 4283],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Загублене в Годенському лісі поселення друїдів. Точніше, дорога до нього торована і добре відома, але мало кого друїди справді готові вітати в своїх володіннях.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -815,7 +815,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_14",
+    name:        "Евенельд",
     points: [
       [6789, 6189],
       [6756, 6150],
@@ -853,8 +853,8 @@ const MARKERS = [
       [6810, 6245],
       [6803, 6215],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Хлібна столиця Руймдалю. На полях і заливних луках Евенельду вирощують пшеницю, рис та всі інші такі потрібні королівству рослини. Попри це, місто живе на межі бідності, адже зерно звідси експортують за безцінь.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -862,7 +862,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_15",
+    name:        "Бовемор",
     points: [
       [6870, 855],
       [6908, 913],
@@ -913,8 +913,8 @@ const MARKERS = [
       [6947, 776],
       [6879, 802],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Розташоване на вершині гірської стіни поселення дивакуватого народу, не зовсім частина королівства, але і не зовсім відділене від нього, звідси Руймдал отримує цінні рештки пустельних потвор.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -922,7 +922,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_16",
+    name:        "Дюренбур",
     points: [
       [10158, 1737],
       [10175, 1781],
@@ -955,8 +955,8 @@ const MARKERS = [
       [10188, 1636],
       [10161, 1695],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Чи не єдине військове поселення Руймдалю, Дюренбур є осередком вартових, що охороняють єдиний шлях з Хижої Пустелі до плідних земель королівства.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -964,7 +964,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_17",
+    name:        "Зауторд",
     points: [
       [2201, 4761],
       [2168, 4746],
@@ -1017,8 +1017,8 @@ const MARKERS = [
       [2236, 4807],
       [2221, 4780],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Прибережне, пропахле сіллю та рибою місто. Колись воно було хлібницею Трентона, після об'єднання королівств поступилось Евенельду цим титулом, але й досі риболовні човни щодня виходять тут у море.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1026,7 +1026,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_18",
+    name:        "Маленот",
     points: [
       [9946, 10304],
       [9924, 10249],
@@ -1064,8 +1064,8 @@ const MARKERS = [
       [9939, 10364],
       [9946, 10337],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Відносно нове місто, що займається майже виключно видобутком деревини для столичних верфів. Його самотнє розташування приваблює таких саме усамітнених мешканців.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1073,7 +1073,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_19",
+    name:        "Дорнвальд",
     points: [
       [7654, 1885],
       [7641, 1855],
@@ -1117,8 +1117,8 @@ const MARKERS = [
       [7644, 1956],
       [7656, 1920],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Самотнє поселення серед боліт, мало чим відоме, окрім як своєю дивовижною уособленістю.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1126,7 +1126,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_20",
+    name:        "Годенбранд",
     points: [
       [8407, 6552],
       [8408, 6588],
@@ -1169,8 +1169,8 @@ const MARKERS = [
       [8517, 6417],
       [8436, 6494],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Невеличке поселення на кордонах Годенського лісу. Колись тут збирались видобувати деревину, проте після кількох жорстких сутичок з друїдами, містечко натомість зайнялось землеробством та створенням артефактів.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1178,7 +1178,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_21",
+    name:        "Далварт",
     points: [
       [6021, 4227],
       [5980, 4212],
@@ -1229,8 +1229,8 @@ const MARKERS = [
       [6064, 4296],
       [6049, 4255],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Третє за розміром місто королівства і найбільший його торговий центр. Всі дороги ведуть до Далварту. Тут продається все, від їжі до задоволень – якщо назвати правильну ціну.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1238,7 +1238,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_22",
+    name:        "Тенемор",
     points: [
       [4554, 1099],
       [4479, 1101],
@@ -1284,8 +1284,8 @@ const MARKERS = [
       [4534, 1182],
       [4534, 1156],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Місто каменю та металу, вбудоване в глибоку ущелину Увемора. Звідси надходить більшість металів королівства. Значна частина населення – гноми.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1293,7 +1293,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_23",
+    name:        "Увекам",
     points: [
       [7072, 4473],
       [7054, 4436],
@@ -1330,8 +1330,8 @@ const MARKERS = [
       [7062, 4544],
       [7074, 4508],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Колись, до побудови Далвартського каналу, саме тут протікав величний Едельструм. Коли ріку переспрямували в нове русло, містечко у переправи занепало, перетворившись на всього лиш одне з передмість Далварту.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1339,7 +1339,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_24",
+    name:        "Зібенайзен",
     points: [
       [3057, 1620],
       [3058, 1664],
@@ -1377,8 +1377,8 @@ const MARKERS = [
       [3119, 1557],
       [3077, 1572],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Невеличке, але горде поселення, колись відоме своїми зброярями, а нині – ковалями.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1386,7 +1386,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_25",
+    name:        "Вахтаддер",
     points: [
       [10111, 6754],
       [10114, 6793],
@@ -1424,8 +1424,8 @@ const MARKERS = [
       [10131, 6706],
       [10118, 6728],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Невеличке поселення, сконцентроване навколо однойменної академії елітних захисників. Окрім, власне, академії, тут мало що є, але і цього достатньо, щоб бути відомим.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1433,7 +1433,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_26",
+    name:        "Найтсворн",
     points: [
       [10524, 10426],
       [10489, 10416],
@@ -1467,8 +1467,8 @@ const MARKERS = [
       [10490, 10480],
       [10506, 10464],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Маленьке поселення, що колись було центром видобутку деревини усього Північного Руймдалю, нині поступово втрачає свої позиції, а разом з ними – і мешканців.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
@@ -1476,7 +1476,7 @@ const MARKERS = [
 
   {
     type:        "polygon",
-    name:        "poly_27",
+    name:        "Вайм",
     points: [
       [3139, 5634],
       [3115, 5606],
@@ -1515,8 +1515,8 @@ const MARKERS = [
       [3148, 5709],
       [3151, 5670],
     ],
-    glowColor:   "#000000",
-    description: "DESCRIPTION",
+    glowColor:   "#d9c634",
+    description: "Невеличке, проте успішне поселення. Коні з Вайму тягнуть чимало карет Руймдальської шляхти, а ваймське вино вже не перше сторіччя є маркою якості.",
     link:        "locations/placeholder.html",
     label:       false,
     labelPermanent: false
