@@ -1,4 +1,4 @@
-export const WORLD = {
+{
   "title": "Ruimdal Economy Simulator",
   "subtitle": "Trade hub kingdom on the edge of a golden age",
   "briefing": "Ruimdal prospers as a redistribution economy: Dalfaros and Iselnes absorb prestige goods and imports, Dalwart taxes movement between regions, and the hinterlands feed the trade core. Peace has lasted for centuries, militarism is muted, and the real pressure comes from widening class separation and a slow, persistent rise in prices.",
@@ -1603,4 +1603,4 @@ export const WORLD = {
       "text": "Kudland is a luxury source; Devenesia is a demand sink. Both strengthen Ruimdal’s trade centrality, but also expose it to outside shocks."
     }
   ]
-};
+}
